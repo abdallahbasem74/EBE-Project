@@ -1,0 +1,135 @@
+/* =========================
+   Global Styles
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  color: white;
+}
+
+/* =========================
+   Main App
+========================= */
+
+.app {
+  min-height: 100vh;
+  padding: 60px 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Page Title */
+
+.app h1 {
+  font-size: 42px;
+  margin-bottom: 50px;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+/* =========================
+   Flexbox Container
+========================= */
+
+.users-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+/* =========================
+   User Card
+========================= */
+
+.user-card {
+  width: 300px;
+  padding: 35px 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+
+  transition: all 0.3s ease;
+}
+
+/* Card Hover */
+
+.user-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================
+   Username
+========================= */
+
+.user-card p:first-child {
+  margin-bottom: 15px;
+
+  font-size: 24px;
+  font-weight: bold;
+
+  color: #60a5fa;
+}
+
+/* =========================
+   Role
+========================= */
+
+.user-card p:last-child {
+  padding: 10px 18px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  color: #e2e8f0;
+
+  background: rgba(96, 165, 250, 0.2);
+
+  border-radius: 20px;
+}
+
+/* =========================
+   Responsive Design
+========================= */
+
+@media (max-width: 650px) {
+  .app {
+    padding: 40px 20px;
+  }
+
+  .app h1 {
+    font-size: 32px;
+  }
+
+  .users-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-card {
+    width: 100%;
+    max-width: 350px;
+  }
+}
