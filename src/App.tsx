@@ -1,4 +1,6 @@
 import "./App.css";
+import { useTheme } from "./context/ThemeContext";
+import ThemeToggleButton from "./components/ThemeToggleButton";
 import UserCard from "./components/UserCard";
 import type { UserCardProps } from "./components/UserCard";
 
@@ -14,9 +16,13 @@ const staticUsers: UserCardProps[] = [
 ];
 
 function App() {
+  const { theme } = useTheme();
+
   return (
-    <div className="app">
+    <div className={`app ${theme}`}>
       <h1>Our Team</h1>
+
+      <ThemeToggleButton />
 
       <div className="users-container">
         {staticUsers.map((user) => (
