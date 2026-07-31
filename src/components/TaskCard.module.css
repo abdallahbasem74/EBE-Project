@@ -28,3 +28,26 @@
   text-decoration: line-through;
   color: #94a3b8;
 }
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.low {
+  background: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+}
+
+.medium {
+  background: rgba(250, 204, 21, 0.2);
+  color: #facc15;
+}
+
+.high {
+  background: rgba(248, 113, 113, 0.2);
+  color: #f87171;
+}

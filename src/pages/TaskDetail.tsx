@@ -21,6 +21,7 @@ export default function TaskDetail() {
       <h2>Task Details</h2>
       <p>Text: {task.text}</p>
       <p>Status: {task.completed ? 'Completed' : 'Not completed'}</p>
+      <p>Priority: {task.priority}</p>
       <Link to="/">Back to Board</Link>
     </div>
   );

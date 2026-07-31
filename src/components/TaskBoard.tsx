@@ -21,8 +21,7 @@ function TaskBoard() {
         <h1>Task Board</h1>
       </div>
 
-      <TaskForm onAddTask={(text) => dispatch({ type: 'ADD_TASK', text })} />
-
+<TaskForm onAddTask={(text, priority) => dispatch({ type: 'ADD_TASK', text, priority })} />
       <Button
         label={showCompleted ? 'Hide Completed' : 'Show Completed'}
         onClick={() => setShowCompleted((prev) => !prev)}
@@ -39,6 +38,8 @@ function TaskBoard() {
             id={task.id}
             text={task.text}
             completed={task.completed}
+            priority={task.priority}
+
             onToggle={() => dispatch({ type: 'TOGGLE_TASK', id: task.id })}
             onDelete={() => dispatch({ type: 'DELETE_TASK', id: task.id })}
           />
