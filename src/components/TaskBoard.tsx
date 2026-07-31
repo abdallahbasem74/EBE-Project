@@ -1,13 +1,19 @@
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import { taskReducer } from '../context/taskReducer';
 import { useTheme } from '../context/ThemeContext';
 import TaskForm from './TaskForm';
 import TaskCard from './TaskCard';
 import ThemeToggleButton from './ThemeToggleButton';
+import Button from './Button';
 
 function TaskBoard() {
   const [tasks, dispatch] = useReducer(taskReducer, []);
+  const [showCompleted, setShowCompleted] = useState(true);
   const { theme } = useTheme();
+
+  const visibleTasks = showCompleted
+    ? tasks
+    : tasks.filter((task) => !task.completed);
 
   return (
     <div className={`task-board ${theme}`}>
@@ -18,8 +24,17 @@ function TaskBoard() {
 
       <TaskForm onAddTask={(text) => dispatch({ type: 'ADD_TASK', text })} />
 
+      <Button
+        label={showCompleted ? 'Hide Completed' : 'Show Completed'}
+        onClick={() => setShowCompleted((prev) => !prev)}
+      />
+
       <div className="task-list">
-        {tasks.map((task) => (
+        {visibleTasks.length === 0 && (
+          <p className="empty-state">No tasks yet — add one above!</p>
+        )}
+
+        {visibleTasks.map((task) => (
           <TaskCard
             key={task.id}
             text={task.text}
