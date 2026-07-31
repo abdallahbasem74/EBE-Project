@@ -1,14 +1,13 @@
-import { useReducer, useState } from 'react';
-import { taskReducer } from '../context/taskReducer';
+import { useState } from 'react';
+import { useTasks } from '../context/TaskContext';
 import useTheme from '../context/theme';
 import TaskForm from './TaskForm';
 import TaskCard from './TaskCard';
-import ThemeToggleButton from './ThemeToggleButton';
 import Button from './Button';
 import styles from './TaskBoard.module.css';
 
 function TaskBoard() {
-  const [tasks, dispatch] = useReducer(taskReducer, []);
+  const { tasks, dispatch } = useTasks();
   const [showCompleted, setShowCompleted] = useState(true);
   const { theme } = useTheme();
 
@@ -20,7 +19,6 @@ function TaskBoard() {
     <div className={`${styles.board} ${theme === 'dark' ? styles.dark : styles.light}`}>
       <div className={styles.header}>
         <h1>Task Board</h1>
-        <ThemeToggleButton />
       </div>
 
       <TaskForm onAddTask={(text) => dispatch({ type: 'ADD_TASK', text })} />
@@ -38,6 +36,7 @@ function TaskBoard() {
         {visibleTasks.map((task) => (
           <TaskCard
             key={task.id}
+            id={task.id}
             text={task.text}
             completed={task.completed}
             onToggle={() => dispatch({ type: 'TOGGLE_TASK', id: task.id })}

@@ -1,0 +1,21 @@
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-block: 1rem;
+}
+
+.logo {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.sideContainer {
+    width: 12em;
+}
+
+.gap {
+    display: flex;
+    gap: 2rem;
+}

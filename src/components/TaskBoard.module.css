@@ -7,16 +7,6 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.dark {
-  background: linear-gradient(135deg, #0f172a, #1e3a8a);
-  color: #ffffff;
-}
-
-.light {
-  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-  color: #1a1a1a;
-}
-
 .header {
   display: flex;
   justify-content: space-between;
