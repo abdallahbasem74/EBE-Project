@@ -5,6 +5,7 @@ import TaskForm from './TaskForm';
 import TaskCard from './TaskCard';
 import ThemeToggleButton from './ThemeToggleButton';
 import Button from './Button';
+import styles from './TaskBoard.module.css';
 
 function TaskBoard() {
   const [tasks, dispatch] = useReducer(taskReducer, []);
@@ -16,8 +17,8 @@ function TaskBoard() {
     : tasks.filter((task) => !task.completed);
 
   return (
-    <div className={`task-board ${theme}`}>
-      <div className="task-board-header">
+    <div className={`${styles.board} ${theme === 'dark' ? styles.dark : styles.light}`}>
+      <div className={styles.header}>
         <h1>Task Board</h1>
         <ThemeToggleButton />
       </div>
@@ -29,9 +30,9 @@ function TaskBoard() {
         onClick={() => setShowCompleted((prev) => !prev)}
       />
 
-      <div className="task-list">
+      <div className={styles.taskList}>
         {visibleTasks.length === 0 && (
-          <p className="empty-state">No tasks yet — add one above!</p>
+          <p className={styles.emptyState}>No tasks yet — add one above!</p>
         )}
 
         {visibleTasks.map((task) => (

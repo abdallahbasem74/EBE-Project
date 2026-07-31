@@ -1,3 +1,5 @@
+import styles from './Button.module.css';
+
 interface ButtonProps {
   label: string;
   onClick: () => void;
@@ -6,7 +8,10 @@ interface ButtonProps {
 
 function Button({ label, onClick, variant = 'primary' }: ButtonProps) {
   return (
-    <button className={`btn btn-${variant}`} onClick={onClick}>
+    <button
+      className={`${styles.btn} ${variant === 'danger' ? styles.danger : styles.primary}`}
+      onClick={onClick}
+    >
       {label}
     </button>
   );

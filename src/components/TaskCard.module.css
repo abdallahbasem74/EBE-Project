@@ -1,0 +1,30 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.text {
+  flex: 1;
+  font-size: 16px;
+}
+
+.completed {
+  composes: card;
+  opacity: 0.6;
+}
+
+.completedText {
+  composes: text;
+  text-decoration: line-through;
+  color: #94a3b8;
+}

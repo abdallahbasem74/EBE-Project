@@ -1,13 +1,10 @@
 import { useTheme } from '../context/ThemeContext';
+import Button from './Button';
 
 function ThemeToggleButton() {
   const { toggleTheme } = useTheme();
 
-  return (
-    <button onClick={toggleTheme}>
-      Toggle Theme
-    </button>
-  );
+  return <Button label="Toggle Theme" onClick={toggleTheme} />;
 }
 
 export default ThemeToggleButton;
