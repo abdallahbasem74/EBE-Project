@@ -1,0 +1,29 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "text": "Learn React Router",
+      "completed": true,
+      "priority": "Medium"
+    },
+    {
+      "id": "2",
+      "text": "Build the Task Board API",
+      "completed": false,
+      "priority": "High"
+    },
+    {
+      "id": "3",
+      "text": "Write unit tests",
+      "completed": false,
+      "priority": "Low"
+    },
+    {
+      "text": "sss",
+      "completed": false,
+      "priority": "Medium",
+      "id": "ii4woksi6YU"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

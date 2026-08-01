@@ -5,7 +5,7 @@ import { taskSchema, type TaskFormData } from '../context/taskSchema';
 import styles from './TaskForm.module.css';
 
 interface TaskFormProps {
-  onAddTask: (text: string, priority: 'Low' | 'Medium' | 'High') => void;
+  onAddTask: (task: { id: number; text: string; completed: boolean; priority: 'Low' | 'Medium' | 'High' }) => void;
 }
 
 function TaskForm({ onAddTask }: TaskFormProps) {
@@ -22,17 +22,28 @@ function TaskForm({ onAddTask }: TaskFormProps) {
   });
 
   const onSubmit = async (data: TaskFormData) => {
-    setSubmissionStatus('submitting');
-    try {
-      // simulate a brief API delay
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      onAddTask(data.text, data.priority);
-      setSubmissionStatus('success');
-      reset();
-    } catch {
-      setSubmissionStatus('error');
-    }
-  };
+  setSubmissionStatus('submitting');
+  try {
+    const response = await fetch('http://localhost:3001/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        text: data.text,
+        completed: false,
+        priority: data.priority,
+      }),
+    });
+
+    if (!response.ok) throw new Error('Failed to add task');
+
+    const newTask = await response.json();
+    onAddTask(newTask); // pass the whole server-created task, including its real id
+    setSubmissionStatus('success');
+    reset();
+  } catch {
+    setSubmissionStatus('error');
+  }
+};
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>

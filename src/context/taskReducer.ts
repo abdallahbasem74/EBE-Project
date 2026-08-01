@@ -6,17 +6,17 @@ export interface Task {
 }
 
 export type TaskAction =
-  | { type: 'ADD_TASK'; text: string; priority: 'Low' | 'Medium' | 'High' }
+  | { type: 'SET_TASKS'; tasks: Task[] }
+  | { type: 'ADD_TASK'; task: Task }
   | { type: 'TOGGLE_TASK'; id: number }
   | { type: 'DELETE_TASK'; id: number };
 
 export function taskReducer(state: Task[], action: TaskAction): Task[] {
   switch (action.type) {
+    case 'SET_TASKS':
+      return action.tasks;
     case 'ADD_TASK':
-      return [
-        ...state,
-        { id: Date.now(), text: action.text, completed: false, priority: action.priority },
-      ];
+      return [...state, action.task];
     case 'TOGGLE_TASK':
       return state.map((t) =>
         t.id === action.id ? { ...t, completed: !t.completed } : t
