@@ -1,14 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTask } from '../features/tasks/tasksSlice';
 import { taskSchema, type TaskFormData } from '../context/taskSchema';
 import styles from './TaskForm.module.css';
 
-interface TaskFormProps {
-  onAddTask: (task: { id: number; text: string; completed: boolean; priority: 'Low' | 'Medium' | 'High' }) => void;
-}
-
-function TaskForm({ onAddTask }: TaskFormProps) {
+function TaskForm() {
+  const dispatch = useDispatch();
   const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const {
@@ -22,28 +21,28 @@ function TaskForm({ onAddTask }: TaskFormProps) {
   });
 
   const onSubmit = async (data: TaskFormData) => {
-  setSubmissionStatus('submitting');
-  try {
-    const response = await fetch('http://localhost:3001/tasks', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        text: data.text,
-        completed: false,
-        priority: data.priority,
-      }),
-    });
+    setSubmissionStatus('submitting');
+    try {
+      const response = await fetch('http://localhost:3001/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: data.text,
+          completed: false,
+          priority: data.priority,
+        }),
+      });
 
-    if (!response.ok) throw new Error('Failed to add task');
+      if (!response.ok) throw new Error('Failed to add task');
 
-    const newTask = await response.json();
-    onAddTask(newTask); // pass the whole server-created task, including its real id
-    setSubmissionStatus('success');
-    reset();
-  } catch {
-    setSubmissionStatus('error');
-  }
-};
+      const newTask = await response.json();
+      dispatch(addTask(newTask));
+      setSubmissionStatus('success');
+      reset();
+    } catch {
+      setSubmissionStatus('error');
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>

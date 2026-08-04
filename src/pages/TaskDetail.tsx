@@ -1,9 +1,10 @@
 import { useParams, Link } from 'react-router-dom';
-import { useTasks } from '../context/TaskContext';
+import { useSelector } from 'react-redux';
+import { selectAllTasks } from '../features/tasks/tasksSlice';
 
 export default function TaskDetail() {
   const { taskId } = useParams();
-  const { tasks } = useTasks();
+  const tasks = useSelector(selectAllTasks);
 
   const task = tasks.find((t) => t.id === Number(taskId));
 
